@@ -6,17 +6,25 @@
 
 1. [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or [download/unzip](https://github.com/ilankham/advent_of_code_2024/archive/main.zip) this repo.
 
-2. Install packages specified in [requirements.txt](requirements.txt), e.g., from the command line:
+2. Inside the local clone, create a new directory called `config`.
+
+3. Inside the `config` directory, create a file called `session_id.txt`.
+   
+4. Log into https://adventofcode.com/ using a web browser, and use [developer tools](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/) to copy the value of a cookie named "session" associated with the domain adventofcode.com. (Note: As of this writing, when logged in using a Google account, session id is a 128-digit hexadecimal number.)
+   
+5. Paste the contents of this cookie into the file `config/session_id.txt`.
+
+6. Install packages specified in [requirements.txt](requirements.txt), e.g., from the command line:
 ```
 pip install -r requirements.txt
 ```
 
-3. Open the solution for a specific day, e.g., from the command line:
+7. Open the solution for a specific day, e.g., from the command line:
 ```
 jupyter lab day01.ipynb
 ```
 
-4. For context about a specific problem, see <https://adventofcode.com/2024/>
+8. For context about a specific problem, see <https://adventofcode.com/2024/>
 
 
 ### Prerequisites
