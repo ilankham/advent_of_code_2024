@@ -105,4 +105,7 @@ if __name__ == '__main__':
     print(f'{test_data=}')
     print(f'{test_data.as_int=}')
     print(f'{test_data.as_polars=}')
+    print(f'{test_data.create_polars()=}')
     print(f'{test_data.as_string=}')
+    print(f'{test_data.as_tuple=}')
+    print(f'{test_data.create_tuple()=}')
