@@ -52,6 +52,10 @@ class AoCMap:
         return y_max
 
     @property
+    def shape(self) -> Tuple[int, int]:
+        return self.x_max, self.y_max
+
+    @property
     def position(self) -> Tuple[int, int]:
         return self.x, self.y
 
