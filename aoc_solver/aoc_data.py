@@ -28,15 +28,6 @@ class AoCData:
         """
         return int(''.join(char for char in self.raw_data if str.isdigit(char)))
 
-    # @property
-    # def as_polars(self):
-    #     """
-    #         AoCData.as_polars = AoCData.create_polars(int, None) with any
-    #         amount of contiguous white space treated as a single column
-    #         delimiter and all values coerced to integers
-    #     """
-    #     return self.create_polars(int, None)
-
     def create_polars(
         self,
         dtype: Callable = str,
@@ -84,15 +75,6 @@ class AoCData:
     @property
     def as_string(self):
         return self.raw_data
-
-    # @property
-    # def as_tuple(self):
-    #     """
-    #         AoCData.as_tuple = AoCData.create_tuple(int, None) with any
-    #         amount of contiguous white space treated as a single column
-    #         delimiter and all values coerced to integers
-    #     """
-    #     return self.create_tuple(int, None)
 
     def create_tuple(
         self,
