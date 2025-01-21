@@ -28,14 +28,14 @@ class AoCData:
         """
         return int(''.join(char for char in self.raw_data if str.isdigit(char)))
 
-    @property
-    def as_polars(self):
-        """
-            AoCData.as_polars = AoCData.create_polars(int, None) with any
-            amount of contiguous white space treated as a single column
-            delimiter and all values coerced to integers
-        """
-        return self.create_polars(int, None)
+    # @property
+    # def as_polars(self):
+    #     """
+    #         AoCData.as_polars = AoCData.create_polars(int, None) with any
+    #         amount of contiguous white space treated as a single column
+    #         delimiter and all values coerced to integers
+    #     """
+    #     return self.create_polars(int, None)
 
     def create_polars(
         self,
@@ -47,6 +47,15 @@ class AoCData:
             column names, attempting to coerce all values to the provided data
             type, treating the provided seperator as column delimiters, and
             naming columns col1, col2, ..., col<n>
+
+            Example: AoCData.create_polars(int, None) will read in a columnar
+                     array of integers, with any amount of contiguous white
+                     space treated as a single column delimiter.
+
+            Example: AoCData.create_polars() will read in a columnar
+                     array of characters with no spaces between them, treating
+                     new line breaks as row separators and each character in a
+                     line as a separate column.
         """
         rows = list(
             zip(
@@ -76,14 +85,14 @@ class AoCData:
     def as_string(self):
         return self.raw_data
 
-    @property
-    def as_tuple(self):
-        """
-            AoCData.as_tuple = AoCData.create_tuple(int, None) with any
-            amount of contiguous white space treated as a single column
-            delimiter and all values coerced to integers
-        """
-        return self.create_tuple(int, None)
+    # @property
+    # def as_tuple(self):
+    #     """
+    #         AoCData.as_tuple = AoCData.create_tuple(int, None) with any
+    #         amount of contiguous white space treated as a single column
+    #         delimiter and all values coerced to integers
+    #     """
+    #     return self.create_tuple(int, None)
 
     def create_tuple(
         self,
@@ -94,6 +103,14 @@ class AoCData:
             returns self.raw_data as a tuple, attempting to coerce all values
             to the provided data type and treating the provided seperator as
             element delimiters
+
+            Example: AoCData.create_tuple(int, None) will read in a tuple of
+                     integers, with any amount of contiguous white space
+                     treated as an element delimiter.
+
+            Example: AoCData.create_tuple() will read in a tuple of
+                     strings, with two line breaks treated as an element
+                     delimiter.
         """
         return tuple(dtype(i) for i in self.raw_data.split(separator))
 
@@ -104,8 +121,6 @@ if __name__ == '__main__':
     test_data = AoCData('1 2 3\n7 8\n9\n\n4 10\n5 11\n6 12 13\n')
     print(f'{test_data=}')
     print(f'{test_data.as_int=}')
-    print(f'{test_data.as_polars=}')
     print(f'{test_data.create_polars()=}')
     print(f'{test_data.as_string=}')
-    print(f'{test_data.as_tuple=}')
     print(f'{test_data.create_tuple()=}')
