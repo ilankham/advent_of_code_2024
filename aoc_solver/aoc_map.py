@@ -1,4 +1,5 @@
 # import from standard library packages
+from collections import defaultdict
 from dataclasses import dataclass
 from enum import IntEnum
 import math
@@ -41,6 +42,9 @@ class AoCMap:
     def clone(self):
         return AoCMap(self.df.clone(), self.x, self.y, self.heading)
 
+    def encloses(self, x: int, y: int) -> bool:
+        return x in range(self.x_max) and y in range(self.y_max)
+
     @property
     def x_max(self) -> int:
         _, x_max = self.df.shape
@@ -62,7 +66,7 @@ class AoCMap:
     @position.setter
     def position(self, value: Tuple[int, int]) -> None:
         x_new, y_new = value
-        if x_new not in range(self.x_max) or y_new not in range(self.y_max):
+        if not self.encloses(x_new, y_new):
             raise OutOfBounds(f'Position {value} is out of bounds!')
         self.x, self.y = x_new, y_new
 
@@ -78,6 +82,14 @@ class AoCMap:
                 self.df.unpivot().get_column('value').value_counts().iter_rows()
             )
         )
+
+    @property
+    def element_positions(self) -> Dict[Any, List[Tuple[int, int]]]:
+        return_value = defaultdict(list)
+        for x in range(self.x_max):
+            for y in range(self.y_max):
+                return_value[self.df[y,x]].append((x, y))
+        return dict(sorted(return_value.items()))
 
     def look(self, steps: Optional[int] = None,
              direction: Optional[Direction] = None) -> Optional[List] | Any:
@@ -370,4 +382,6 @@ if __name__ == "__main__":
     m.update(values=list(range(90, 100)), direction=Direction.NW, offset=3)
     print(f'{m=}\n')
 
-    print(f'{m.value_counts=}')
+    print(f'{m.value_counts=}\n')
+
+    print(f'{m.element_positions=}\n')
