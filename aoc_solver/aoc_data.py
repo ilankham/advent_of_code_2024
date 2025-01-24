@@ -94,8 +94,12 @@ class AoCData:
                      strings, with two line breaks treated as an element
                      delimiter.
         """
-        return tuple(dtype(i) for i in self.raw_data.split(separator))
-
+        return tuple(
+            dtype(i) for i in (
+                self.raw_data.split(separator)
+                if separator != '' else list(self.raw_data)
+            )
+        )
 
 # inline test code follows
 if __name__ == '__main__':
